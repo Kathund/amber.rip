@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+.starParticle {
+  --w: 48px;
+  animation:
+    aroundtheworld calc(8 * var(--d)) infinite linear,
+    bob calc(3 * var(--d)) ease-in-out alternate infinite;
+  animation-delay: calc(calc(var(--d) + 20s) * -8);
+}
+
+@keyframes bob {
+  from {
+    top: calc(100vh * var(--o));
+  }
+  to {
+    top: calc(calc(100vh * var(--o)) + 32px);
+  }
+}
+
+@keyframes aroundtheworld {
+  from {
+    left: calc(0px - var(--w));
+  }
+  to {
+    left: calc(100vw + var(--w));
+  }
+}
+
+.fancyCursor.isVisible {
+  opacity: 1;
+}
+
+.fancyCursor.isInteractive {
+  transform: translate(-50%, -50%) scale(4);
+}
