@@ -18,7 +18,7 @@
     "prettier:check": "pnpm exec prettier --check .",
     "eslint:check": "pnpm exec eslint . ",
     "eslint": "pnpm eslint:check --fix",
-    "cloudflare:test": "pnpm build && pnpm wrangler dev",
+    "cloudflare:dev": "pnpm build && pnpm wrangler dev",
     "cloudflare:deploy": "pnpm build && pnpm wrangler deploy",
     "check": "pnpm install --frozen-lockfile && pnpm prettier && pnpm eslint && pnpm build",
     "generate-types": "pnpm exec wrangler types"

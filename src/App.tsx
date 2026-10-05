@@ -6,17 +6,30 @@ import useSettings from './contexts/settings/useSettings.ts';
 import { HandleTable } from './components/handles/HandleTable.tsx';
 import { randomNumber } from './static/functions.ts';
 import { twMerge } from 'tailwind-merge';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { HandleItem } from './components/handles/Handle.tsx';
 import type { StarParticleProps } from './components/stars/StarParticle.tsx';
 
 export default function App() {
-  const handles: HandleItem[] = [
-    { label: 'signal', handle: '@amber.222' },
-    { label: 'matrix', handle: '@kathund:snowball.kathund.dev' },
-    { label: 'email', handle: 'contact@amber.rip', link: 'mailto:contact@amber.rip' },
-    { label: 'discord', handle: '@amber.rip' }
-  ];
+  const [handles, setHandles] = useState<HandleItem[]>([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    fetch('/handles.json')
+      .then((response) => {
+        if (!response.ok) throw new Error(`Failed to load handles: ${response.status}`);
+        return response.json() as Promise<HandleItem[]>;
+      })
+      .then((loadedHandles) => {
+        if (isMounted) setHandles(loadedHandles);
+      })
+      .catch((error: unknown) => console.error(error));
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const [particles] = useState<StarParticleProps[]>(() =>
     new Array(randomNumber(20, 35))
