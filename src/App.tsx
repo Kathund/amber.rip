@@ -57,10 +57,12 @@ export default function App() {
             </p>
           </div>
           <div className="flex flex-col justify-self-end text-right">
-            <LinkComponent to="/pgp" title="926A E4E7 F90C C6E2 FED6 D71B 0CC2 5AAA 1364 985C">
+            <LinkComponent to="/pgp" title="926A E4E7 F90C C6E2 FED6 D71B 0CC2 5AAA 1364 985C" reloadDocument>
               pgp: 1364985C
             </LinkComponent>
-            <LinkComponent to="/ssh">ssh: id_ed25519.pub</LinkComponent>
+            <LinkComponent to="/ssh" reloadDocument>
+              ssh: id_ed25519.pub
+            </LinkComponent>
           </div>
         </header>
         <main className="relative flex flex-col gap-12 py-16">

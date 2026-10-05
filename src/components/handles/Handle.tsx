@@ -23,7 +23,8 @@ export function Handle({ label, handle, link = `/${label}`, id }: HandleProps) {
           ? 'border-b-white/20 hover:bg-white hover:text-black/40'
           : 'border-b-black/20 hover:bg-black hover:text-white/40',
         'group border-b transition-colors'
-      )}>
+      )}
+      reloadDocument>
       <div className="grid grid-cols-1 items-center gap-2 p-4 lg:grid-cols-[5rem_minmax(0,1fr)_max-content]">
         <p className="hidden lg:block">{id}</p>
         <p
