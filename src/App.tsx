@@ -14,7 +14,7 @@ export default function App() {
   const handles: HandleItem[] = [
     { label: 'signal', handle: '@amber.222' },
     { label: 'matrix', handle: '@kathund:snowball.kathund.dev' },
-    { label: 'email', handle: 'contact@amber.rip' },
+    { label: 'email', handle: 'contact@amber.rip', link: 'mailto:contact@amber.rip' },
     { label: 'discord', handle: '@amber.rip' }
   ];
 
