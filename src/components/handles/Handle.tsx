@@ -6,13 +6,14 @@ export interface HandleItem {
   label: string;
   handle: string;
   link?: string;
+  note?: string;
 }
 
 export interface HandleProps extends HandleItem {
   id: string;
 }
 
-export function Handle({ label, handle, link = `/${label}`, id }: HandleProps) {
+export function Handle({ label, handle, link = `/${label}`, note, id }: HandleProps) {
   const { settings } = useSettings();
   return (
     <LinkComponent
@@ -27,14 +28,20 @@ export function Handle({ label, handle, link = `/${label}`, id }: HandleProps) {
       reloadDocument>
       <div className="grid grid-cols-1 items-center gap-2 p-4 lg:grid-cols-[5rem_minmax(0,1fr)_max-content]">
         <p className="hidden lg:block">{id}</p>
-        <p
+        <div
           className={twMerge(
             settings.reducedMotion ? 'duration-0' : 'duration-300',
-            settings.darkMode ? 'text-white group-hover:text-black' : 'text-black group-hover:text-white',
-            'text-5xl font-bold transition-all ease-in-out group-hover:pl-3'
+            'font-bold transition-all ease-in-out group-hover:pl-3'
           )}>
-          {label}
-        </p>
+          <p
+            className={twMerge(
+              settings.darkMode ? 'text-white group-hover:text-black' : 'text-black group-hover:text-white',
+              'text-5xl'
+            )}>
+            {label}
+          </p>
+          {note && <p>{note}</p>}
+        </div>
         <p className="hidden text-right lg:block">{handle}</p>
         <div className="flex flex-row items-center justify-between lg:hidden">
           <p>{id}</p>

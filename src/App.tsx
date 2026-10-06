@@ -3,41 +3,22 @@ import FancyCursor from './components/FancyCursor.tsx';
 import LinkComponent from './components/LinkComponent.tsx';
 import StarField from './components/stars/StarField.tsx';
 import useSettings from './contexts/settings/useSettings.ts';
-import { HandleTable } from './components/handles/HandleTable.tsx';
+import { Route, Routes } from 'react-router';
+import { lazy, useState } from 'react';
 import { randomNumber } from './static/functions.ts';
 import { twMerge } from 'tailwind-merge';
-import { useEffect, useState } from 'react';
-import type { HandleItem } from './components/handles/Handle.tsx';
 import type { StarParticleProps } from './components/stars/StarParticle.tsx';
 
+const Home = lazy(() => import('./pages/Home.tsx'));
+
 export default function App() {
-  const [handles, setHandles] = useState<HandleItem[]>([]);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    fetch('/handles.json')
-      .then((response) => {
-        if (!response.ok) throw new Error(`Failed to load handles: ${response.status}`);
-        return response.json() as Promise<HandleItem[]>;
-      })
-      .then((loadedHandles) => {
-        if (isMounted) setHandles(loadedHandles);
-      })
-      .catch((error: unknown) => console.error(error));
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
+  const { settings, setSettings } = useSettings();
   const [particles] = useState<StarParticleProps[]>(() =>
     new Array(randomNumber(20, 35))
       .fill({})
       .map((_, index) => ({ delay: ((Math.random() * 10) % 1) + 2.5, offset: Math.random(), index }))
   );
 
-  const { settings, setSettings } = useSettings();
   return (
     <div
       className={twMerge(
@@ -79,14 +60,9 @@ export default function App() {
           </div>
         </header>
         <main className="relative flex flex-col gap-12 py-16">
-          <div className="text-center lg:text-left">
-            <p className={twMerge(settings.darkMode ? 'text-white' : 'text-black', 'text-8xl font-bold')}>amber</p>
-            <div className={twMerge(settings.darkMode ? 'text-white/40' : 'text-black/40', 'flex flex-col text-sm')}>
-              <p>i write shitty code</p>
-              <p>she/her</p>
-            </div>
-          </div>
-          <HandleTable handles={handles} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
         </main>
         <footer
           className={twMerge(
