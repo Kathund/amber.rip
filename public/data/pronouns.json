@@ -1,0 +1,25 @@
+{
+  "Legend": [
+    { "preference": "love", "description": "i love this! please use this" },
+    { "preference": "okay", "description": "i like this" },
+    { "preference": "close", "description": "only if we are close" }
+  ],
+  "Items": [
+    {
+      "title": "names",
+      "values": [
+        { "value": "amber", "preference": "love" },
+        { "value": "kathund", "preference": "okay" }
+      ]
+    },
+    {
+      "title": "descriptions",
+      "values": [
+        { "value": "person", "preference": "okay" },
+        { "value": "woman", "preference": "love" },
+        { "value": "girl", "preference": "love" },
+        { "value": "sis", "preference": "love" }
+      ]
+    }
+  ]
+}
