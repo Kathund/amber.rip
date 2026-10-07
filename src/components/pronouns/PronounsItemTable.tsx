@@ -8,7 +8,11 @@ export default function PronounsItemTable({ title, values }: PronounsItemData) {
   const { settings } = useSettings();
   return (
     <div className="flex flex-col">
-      <p className={twMerge(settings.darkMode ? 'text-white' : 'text-black', 'px-4 text-4xl font-bold lg:px-0')}>
+      <p
+        className={twMerge(
+          settings.darkMode ? 'text-white' : 'text-black',
+          'text-center text-4xl font-bold lg:text-left'
+        )}>
         {title}
       </p>
       <div

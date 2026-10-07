@@ -1,10 +1,13 @@
 import PronounsItemTable from '../components/pronouns/PronounsItemTable.tsx';
 import PronounsLegendTable from '../components/pronouns/PronounsLegendTable.tsx';
+import useSettings from '../contexts/settings/useSettings.ts';
+import { twMerge } from 'tailwind-merge';
 import { useEffect, useState } from 'react';
 import type { PronounsData } from '../static/pronouns.ts';
 
 export default function Pronouns() {
   const [pronounsData, setPronounsData] = useState<PronounsData | undefined | null>(undefined);
+  const { settings } = useSettings();
 
   useEffect(() => {
     let isMounted = true;
@@ -27,8 +30,14 @@ export default function Pronouns() {
     };
   }, []);
 
-  if (pronounsData === undefined) return <p>Loading pronouns…</p>;
-  if (pronounsData === null) return <p>Failed to load pronouns.</p>;
+  if (pronounsData === undefined) {
+    return <p className={twMerge(settings.darkMode ? 'text-white' : 'text-black', 'text-3xl')}>Loading pronouns…</p>;
+  }
+  if (pronounsData === null) {
+    return (
+      <p className={twMerge(settings.darkMode ? 'text-white' : 'text-black', 'text-3xl')}>Failed to load pronouns.</p>
+    );
+  }
 
   return (
     <>
